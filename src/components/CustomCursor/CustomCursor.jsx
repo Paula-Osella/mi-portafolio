@@ -1,25 +1,31 @@
 import React, { useEffect, useState } from 'react';
 
 const CustomCursor = () => {
-    const [pos, setPos] = useState({ x: 0, y: 0 });
+  const [pos, setPos] = useState({ x: 0, y: 0 });
 
-    useEffect(() => {
-        const move = (e) => {
-            setPos({ x: e.clientX, y: e.clientY });
-        };
-        window.addEventListener('mousemove', move);
-        return () => window.removeEventListener('mousemove', move);
-    }, []);
+  useEffect(() => {
+    const move = (e) => setPos({ x: e.clientX, y: e.clientY });
+    window.addEventListener('mousemove', move);
+    return () => window.removeEventListener('mousemove', move);
+  }, []);
 
-    return (
-        <div
-  className="hidden md:block fixed top-0 left-0 w-[400px] h-[400px] rounded-full pointer-events-none z-[9999] mix-blend-screen bg-white opacity-10 blur-[180px] transition-transform duration-300 ease-out"
-
-            style={{
-                transform: `translate(${pos.x - 48}px, ${pos.y - 48}px)`,
-            }}
-        />
-    );
+  return (
+    <div
+      style={{
+        position: 'fixed',
+        left: pos.x,
+        top: pos.y,
+        width: '500px',
+        height: '500px',
+        borderRadius: '50%',
+        pointerEvents: 'none',
+        zIndex: 0,
+        background: 'radial-gradient(circle, rgba(110,231,183,0.04) 0%, transparent 70%)',
+        transform: 'translate(-50%, -50%)',
+        transition: 'transform 0.15s ease-out',
+      }}
+    />
+  );
 };
 
 export default CustomCursor;
