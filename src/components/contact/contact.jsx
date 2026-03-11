@@ -1,32 +1,40 @@
 import React, { useRef, useState } from 'react';
-import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const form = useRef();
   const [sent, setSent] = useState(false);
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
+    setLoading(true);
     setError(false);
 
-    emailjs
-      .sendForm(
-        'service_dm4q4is',
-        'template_vglec6p',
-        form.current,
-        'gcbEB2wW1kLoICuTX'
-      )
-      .then(() => {
+    const formData = new FormData(form.current);
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
         setSent(true);
         form.current.reset();
         setTimeout(() => setSent(false), 5000);
-      })
-      .catch((error) => {
-        console.error('Error al enviar el mensaje:', error);
+      } else {
         setError(true);
         setTimeout(() => setError(false), 5000);
-      });
+      }
+    } catch (err) {
+      setError(true);
+      setTimeout(() => setError(false), 5000);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -39,15 +47,15 @@ const Contact = () => {
 
       <form ref={form} onSubmit={sendEmail}>
 
-        {/* Campos ocultos para completar variables del template */}
-        <input type="hidden" name="name" value="Portafolio de Paula" />
-        <input type="hidden" name="title" value="Nuevo mensaje desde el portafolio" />
+        {/* Web3Forms access key */}
+        <input type="hidden" name="access_key" value="62429d1c-7055-4504-9b8b-e4643a24f2b6" />
+        <input type="hidden" name="subject" value="Nuevo mensaje desde tu portafolio" />
 
         <div className="form-group">
           <label className="form-label">Nombre</label>
           <input
             type="text"
-            name="nombre"
+            name="name"
             required
             placeholder="Tu nombre"
             className="form-input"
@@ -68,7 +76,7 @@ const Contact = () => {
         <div className="form-group">
           <label className="form-label">Mensaje</label>
           <textarea
-            name="mensaje"
+            name="message"
             rows="5"
             required
             placeholder="¿En qué puedo ayudarte?"
@@ -77,8 +85,8 @@ const Contact = () => {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '12px' }}>
-          <button type="submit" className="btn-submit">
-            Enviar mensaje ↗
+          <button type="submit" className="btn-submit" disabled={loading}>
+            {loading ? 'Enviando...' : 'Enviar mensaje ↗'}
           </button>
           {sent && (
             <span className="success-msg">
