@@ -4,9 +4,11 @@ import emailjs from '@emailjs/browser';
 const Contact = () => {
   const form = useRef();
   const [sent, setSent] = useState(false);
+  const [error, setError] = useState(false);
 
   const sendEmail = (e) => {
     e.preventDefault();
+    setError(false);
 
     emailjs
       .sendForm(
@@ -18,10 +20,12 @@ const Contact = () => {
       .then(() => {
         setSent(true);
         form.current.reset();
-        setTimeout(() => setSent(false), 4000);
+        setTimeout(() => setSent(false), 5000);
       })
       .catch((error) => {
         console.error('Error al enviar el mensaje:', error);
+        setError(true);
+        setTimeout(() => setError(false), 5000);
       });
   };
 
@@ -34,6 +38,11 @@ const Contact = () => {
       </p>
 
       <form ref={form} onSubmit={sendEmail}>
+
+        {/* Campos ocultos para completar variables del template */}
+        <input type="hidden" name="name" value="Portafolio de Paula" />
+        <input type="hidden" name="title" value="Nuevo mensaje desde el portafolio" />
+
         <div className="form-group">
           <label className="form-label">Nombre</label>
           <input
@@ -71,7 +80,16 @@ const Contact = () => {
           <button type="submit" className="btn-submit">
             Enviar mensaje ↗
           </button>
-          {sent && <span className="success-msg">¡Mensaje enviado correctamente!</span>}
+          {sent && (
+            <span className="success-msg">
+              ✓ ¡Mensaje enviado! Te respondo pronto.
+            </span>
+          )}
+          {error && (
+            <span style={{ color: '#f87171', fontSize: '0.85rem' }}>
+              ✕ Hubo un error. Intentá de nuevo.
+            </span>
+          )}
         </div>
       </form>
     </section>
