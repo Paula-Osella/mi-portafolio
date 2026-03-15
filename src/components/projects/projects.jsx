@@ -95,25 +95,28 @@ const Projects = () => {
                   <span key={i} className="tech-tag">{tech}</span>
                 ))}
               </div>
-            </div>
 
-            <div className="project-links">
-              <a
-                href={project.repo}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="project-link"
-              >
-                ↗ GitHub
-              </a>
-              <a
-                href={project.demo}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="project-link"
-              >
-                ↗ Demo
-              </a>
+              {/* Links movidos adentro de project-info, fuera del ::before */}
+              <div className="project-links">
+                <a
+                  href={project.repo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-link"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  ↗ GitHub
+                </a>
+                <a
+                  href={project.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="project-link"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  ↗ Demo
+                </a>
+              </div>
             </div>
           </div>
         ))}
