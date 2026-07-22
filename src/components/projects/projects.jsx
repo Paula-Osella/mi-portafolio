@@ -2,6 +2,16 @@ import React from 'react';
 
 const projects = [
   {
+  title: 'Cardozo Performance',
+  description: 'Sistema de gestión de turnos para taller mecánico. Los clientes reservan turno según tipo de vehículo y horario disponible; desde el panel de administración se gestionan los turnos (tomar, cancelar, modificar), se cargan costos y se bloquean días de atención.',
+  tech: ['React', 'Astro', 'TailwindCSS', 'Supabase'],
+  status: 'En Producción',
+  statusColor: '#4ade80',
+  repo: '', // dejá vacío si el repo es privado
+  demo: 'https://www.tallercardozo.com/',
+  number: '07',
+},
+  {
     title: 'Dermalosophy Alvit Éclat',
     description: 'Landing comercial para marca de dermocosmética. Proyecto en producción real con identidad visual premium, optimización con Astro e integración de envío automático de emails.',
     tech: ['Astro', 'TailwindCSS', 'JavaScript'],
@@ -61,6 +71,7 @@ const projects = [
     demo: 'https://aesthetic-pathetic.vercel.app/',
     number: '06',
   },
+
 ];
 
 const Projects = () => {

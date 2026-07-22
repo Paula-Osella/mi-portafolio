@@ -118,10 +118,10 @@ nav { display: flex; flex-direction: column; gap: 4px; }
 
 .social-link {
   width: 36px; height: 36px;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255,255,255,0.14);
   border-radius: 8px;
   display: flex; align-items: center; justify-content: center;
-  color: var(--text-muted);
+  color: var(--text);
   text-decoration: none;
   font-size: 15px;
   transition: all 0.3s;
@@ -174,9 +174,10 @@ section:last-child { border-bottom: none; }
 .skill-tag {
   font-size: 0.75rem;
   padding: 5px 12px;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255,255,255,0.14);
   border-radius: 4px;
-  color: var(--text-muted);
+  background: rgba(255,255,255,0.03);
+  color: var(--text);
   letter-spacing: 0.05em;
   transition: all 0.25s;
 }
@@ -267,9 +268,9 @@ section:last-child { border-bottom: none; }
   font-size: 0.68rem;
   padding: 2px 8px;
   background: var(--surface2);
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255,255,255,0.12);
   border-radius: 3px;
-  color: var(--text-muted);
+  color: var(--text);
   letter-spacing: 0.04em;
 }
 
@@ -334,7 +335,7 @@ section:last-child { border-bottom: none; }
   background: var(--surface2);
 }
 
-.form-input::placeholder { color: var(--text-muted); opacity: 0.5; }
+.form-input::placeholder { color: var(--text-muted); opacity: 0.85; }
 
 textarea.form-input { resize: vertical; min-height: 130px; }
 
