@@ -7,7 +7,7 @@ const projects = [
   tech: ['React', 'Astro', 'TailwindCSS', 'Supabase'],
   status: 'En Producción',
   statusColor: '#4ade80',
-  repo: '', // dejá vacío si el repo es privado
+  repo: 'https://github.com/Paula-Osella/mi-portafolio',
   demo: 'https://www.tallercardozo.com/',
   number: '07',
 },
